@@ -1,0 +1,42 @@
+😃 Project Title 
+
+Social Media Application - 梦友 - MengYou 
+
+😃 Brief Introduction 
+
+梦友MengYou is a niche social media application specifically designed for 
+entertainment purpose. Unlike traditional platforms that mix every kind of 
+content together, MengYou curates a focused space where users can share their 
+ideas, connect through communities, buy and sell items, all in one personalized, 
+safe environment. The platform emphasizes clean community interaction, content 
+curation, and high levels of user customization. 
+
+😃 User Roles 
+Guest  : can browse through the platform without account with limited access 
+Registered User : can post content, join communities, buy/sell items 
+Admin : full control over the system, releasing system updates, monitor content 
+
+😃 Functional Requirements 
+
+Guest 
+▸ View public posts and community previews. 
+▸ View a limited number of marketplace listings. 
+
+
+Registered User 
+▸ Register/login/logout. 
+▸ Create/edit/delete personal profile. 
+▸ Post media (text, image, or video). 
+▸ Like, comment, and share posts. 
+▸ Join or leave communities. 
+▸ Browse and search marketplace items. 
+▸ Buy and list items for sale. 
+▸ Create community / manage community
+
+Admin 
+▸ Add/remove/modify user roles. 
+▸ Remove offensive content platform-wide. 
+▸ View analytics (user growth, active users). 
+▸ Manage site settings and policy updates. 
+
+
