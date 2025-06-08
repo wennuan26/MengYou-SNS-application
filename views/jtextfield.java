@@ -48,7 +48,7 @@ public class jtextfield extends javax.swing.JTextField {
 
     @Override
     protected void paintBorder(java.awt.Graphics g) {
-        g.setColor(guiCons.Blue);
+        g.setColor(guiCons.lightpink);
         g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 30, 30);
     }
 
