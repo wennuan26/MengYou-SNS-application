@@ -5,3 +5,4 @@ together, MengYou curates a focused space where users can share their ideas, con
 through communities, buy and sell items, all in one personalized, safe environment.
 The platform emphasizes clean community interaction, content curation, and high
 levels of user customization.
+![image](https://github.com/user-attachments/assets/c67a8833-91df-49c6-adf6-cd3ae09dabcf)
