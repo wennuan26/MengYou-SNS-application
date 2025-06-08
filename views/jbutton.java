@@ -26,9 +26,11 @@ public class jbutton extends JLabel {
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseEntered(MouseEvent e) {
-                setForeground(guiCons.Blue);
+                setForeground(guiCons.lightpink);
             }
+            @Override
             public void mouseExited(MouseEvent e) {
                 setForeground(guiCons.White);
             }
@@ -44,7 +46,7 @@ public class jbutton extends JLabel {
 
     @Override
     protected void paintBorder(java.awt.Graphics g) {
-        g.setColor(guiCons.Blue);
+        g.setColor(guiCons.lightpink);
         g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, radius, radius);
     }
 
