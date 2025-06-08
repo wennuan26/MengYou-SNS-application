@@ -5,13 +5,13 @@
 package views;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
-import java.awt.Graphics;
-import java.awt.geom.RoundRectangle2D;
 
 @SuppressWarnings("serial")
 public class jpasswordfield extends JPasswordField {
@@ -56,7 +56,7 @@ public class jpasswordfield extends JPasswordField {
 
     @Override
     protected void paintBorder(Graphics g) {
-        g.setColor(guiCons.Blue);
+        g.setColor(guiCons.lightpink);
         g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 30, 30);
     }
 
