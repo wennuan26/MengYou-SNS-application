@@ -5,33 +5,52 @@
 package views;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 public class welcome {
+    JFrame frame;
+    JPanel panel;
+    jtextfield firstName, lastName, email;
+    jpasswordfield password, confirmPassword;
+    jbutton createACC;
+    JLabel login;
+    JButton langSwitch;
+    JLabel titleLabel;
 
     public welcome() {
-        jFrame frame = new jFrame();
+        frame = new JFrame("MengYou梦友");
 
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(guiCons.Black);
-        panel.setBorder(BorderFactory.createEmptyBorder(40, 80, 40, 80));
+        panel = new JPanel(new BorderLayout());
+        panel.setBackground(guiCons.pink);
+        panel.setBorder(BorderFactory.createEmptyBorder(53, 84, 76, 84));
+        titleLabel = new JLabel(lang.get("name"), JLabel.CENTER);
+        titleLabel.setFont(new Font("微软雅黑", Font.BOLD, 24));
+        titleLabel.setForeground(guiCons.White);
+        panel.add(titleLabel, BorderLayout.NORTH);
+        panel.add(titleLabel, BorderLayout.NORTH);
+        
+        langSwitch = new JButton(lang.get("lang_switch"));
+        langSwitch.setFocusPainted(false);
+        langSwitch.setForeground(guiCons.White);
+        langSwitch.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        langSwitch.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        langSwitch.addActionListener((ActionEvent e) -> {
+            lang.toggleLanguage();
+            refreshText();
+        });
 
-        jlabel title = new jlabel("欢迎使用 MengYou梦友", 24, guiCons.White, Font.BOLD);
-        title.setHorizontalAlignment(JLabel.CENTER);
-        panel.add(title, BorderLayout.NORTH);
+        JPanel centerPanel = new JPanel(new GridLayout(6, 1, 10, 10));
+        centerPanel.setBackground(guiCons.pink);
+        centerPanel.setForeground(guiCons.Hint);
+        centerPanel.setBorder(BorderFactory.createEmptyBorder(22, 150, 17, 150));
 
-        JPanel centerPanel = new JPanel(new GridLayout(6, 1, 15, 15));
-        centerPanel.setBackground(guiCons.Black);
-        centerPanel.setBorder(BorderFactory.createEmptyBorder(40, 100, 40, 100));
-
-        jtextfield firstName = new jtextfield("First Name");
-        jtextfield lastName = new jtextfield("Last Name");
-        jtextfield email = new jtextfield("Email");
-
-        jpasswordfield password = new jpasswordfield("Password");
-        jpasswordfield confirmPassword = new jpasswordfield("Confirm Password");
-
-        jbutton createACC = new jbutton("Create Account", 30, 16);
+        firstName = new jtextfield(lang.get("first_name"));
+        lastName = new jtextfield(lang.get("last_name"));
+        email = new jtextfield(lang.get("email"));
+        password = new jpasswordfield(lang.get("password"));
+        confirmPassword = new jpasswordfield(lang.get("confirm_password"));
+        createACC = new jbutton(lang.get("create_account"), 50, 18);
 
         centerPanel.add(firstName);
         centerPanel.add(lastName);
@@ -42,14 +61,44 @@ public class welcome {
 
         panel.add(centerPanel, BorderLayout.CENTER);
 
-        jlabel login = new jlabel("Already have an account? Login", 14, guiCons.Hint, Font.PLAIN);
-        login.setHorizontalAlignment(JLabel.CENTER);
+        login = new JLabel(lang.get("already_have"), JLabel.CENTER);
+        login.setForeground(guiCons.Hint1);
         login.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panel.add(login, BorderLayout.SOUTH);
-        
 
+        langSwitch = new JButton(lang.get("lang_switch"));
+        langSwitch.setFocusPainted(false);
+        langSwitch.setForeground(guiCons.lightpink);
+        langSwitch.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        langSwitch.setBackground(guiCons.pink);
+        langSwitch.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+        langSwitch.addActionListener((ActionEvent e) -> {
+            lang.toggleLanguage();
+            refreshText();
+        });
 
-        frame.setContentPane(panel);
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setOpaque(false);
+        topPanel.add(langSwitch, BorderLayout.EAST);
+        topPanel.add(titleLabel, BorderLayout.CENTER);
+        panel.add(topPanel, BorderLayout.NORTH);
+
+        frame.getContentPane().add(panel);
+        frame.pack();
+        frame.setSize(900, 625);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private void refreshText() {
+        titleLabel.setText(lang.get("name"));
+        firstName.setText(lang.get("first_name"));
+        lastName.setText(lang.get("last_name"));
+        email.setText(lang.get("email"));
+        password.setText(lang.get("password"));
+        confirmPassword.setText(lang.get("confirm_password"));
+        createACC.setText(lang.get("create_account"));
+        login.setText(lang.get("already_have"));
+        langSwitch.setText(lang.get("lang_switch"));
     }
 }
