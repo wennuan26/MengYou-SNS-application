@@ -29,14 +29,17 @@ public class jpasswordfield extends JPasswordField {
         setEchoChar((char) 0); // show placeholder
 
         addFocusListener(new FocusListener() {
+            @Override
             public void focusGained(FocusEvent e) {
-                if (getText().equals(placeholder)) {
+                if (!getText().equals(placeholder)) {
+                } else {
                     setText("");
                     setForeground(guiCons.White);
                     setEchoChar('●');
                 }
             }
 
+            @Override
             public void focusLost(FocusEvent e) {
                 if (getPassword().length == 0) {
                     setText(placeholder);
