@@ -6,6 +6,7 @@ package views;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 
 public class welcome {
@@ -23,6 +24,7 @@ public class welcome {
 
         panel = new JPanel(new BorderLayout());
         panel.setBackground(guiCons.pink);
+        frame.setResizable(false);
         panel.setBorder(BorderFactory.createEmptyBorder(53, 84, 76, 84));
         titleLabel = new JLabel(lang.get("name"), JLabel.CENTER);
         titleLabel.setFont(new Font("微软雅黑", Font.BOLD, 24));
@@ -88,6 +90,56 @@ public class welcome {
         frame.setSize(900, 625);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        createACC.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                String first = firstName.getText().trim();
+                String last = lastName.getText().trim();
+                String emailText = email.getText().trim();
+                String pass = new String(password.getPassword()).trim();
+                String confirmPass = new String(confirmPassword.getPassword()).trim();
+
+                if (first.isEmpty() || last.isEmpty() || emailText.isEmpty() || pass.isEmpty() || confirmPass.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, lang.get("alert_empty_fields"));
+                    return;
+                }
+                if (!pass.equals(confirmPass)) {
+                    JOptionPane.showMessageDialog(frame, lang.get("alert_password_mismatch"));
+                    return;
+                }
+                if (pass.length() < 6) {
+                    JOptionPane.showMessageDialog(frame, lang.get("password_too_short"));
+                    return;
+                }
+                if (pass.isEmpty() || confirmPass.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, lang.get("password_empty"));
+                    return;
+                }
+                if (emailText.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, lang.get("email_empty"));
+                    return;
+                }
+
+                // Here you would typically handle account creation logic
+                // For now, we just show a success message
+                // Show success alert dialog
+                JOptionPane.showMessageDialog(frame, lang.get("account_created_successfully"));
+                
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {}
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {}
+        });
     }
 
     private void refreshText() {
