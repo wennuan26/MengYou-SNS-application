@@ -17,6 +17,14 @@ public class lang {
         EN.put("create_account", "Create Account");
         EN.put("already_have", "Already have an account? Login");
         EN.put("lang_switch", "中文");
+        EN.put("alert_title", "Alert");
+        EN.put("alert_empty_fields", "Please fill in all fields.");
+        EN.put("alert_password_mismatch", "Passwords do not match.");
+        EN.put("account_created_successfully", "Account created successfully!");
+        EN.put("account_creation_failed", "Account creation failed. Please try again.");
+        EN.put("password_too_short", "Password must be at least 6 characters long.");
+        EN.put("password_empty", "Password cannot be empty.");
+        EN.put("email_empty", "Email cannot be empty.");
 
         ZH.put("name", "欢迎使用 MengYou梦友");
         ZH.put("first_name", "名");
@@ -27,6 +35,12 @@ public class lang {
         ZH.put("create_account", "创建账户");
         ZH.put("already_have", "已有账户？登录");
         ZH.put("lang_switch", "English");
+        ZH.put("alert_title", "警告");
+        ZH.put("alert_empty_fields", "请填写所有字段。");
+        ZH.put("alert_password_mismatch", "密码不匹配。");
+        ZH.put("account_created_successfully", "账户创建成功！");
+        ZH.put("account_creation_failed", "账户创建失败，请重试。");
+
     }
 
     public static String get(String key) {
