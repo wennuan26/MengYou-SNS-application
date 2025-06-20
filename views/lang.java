@@ -40,6 +40,10 @@ public class lang {
         ZH.put("alert_password_mismatch", "密码不匹配。");
         ZH.put("account_created_successfully", "账户创建成功！");
         ZH.put("account_creation_failed", "账户创建失败，请重试。");
+        ZH.put("password_too_short", "密码必须至少6个字符长。");
+        ZH.put("password_empty", "密码不能为空。");
+        ZH.put("email_empty", "电子邮箱不能为空。");
+        
 
     }
 
