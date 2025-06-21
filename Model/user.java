@@ -14,7 +14,7 @@ public class user {
     private ArrayList<post> likes;
     private ArrayList<user> friends;
 
-    // Fixed constructor syntax and initialized lists to avoid NullPointerException
+    // Constructor initializes lists to avoid NullPointerException
     public user() {
         posts = new ArrayList<>();
         comments = new ArrayList<>();
@@ -22,9 +22,8 @@ public class user {
         friends = new ArrayList<>();
     }
 
-    public int getID(){
+    public int getID() {
         return ID;
-
     }
 
     public void setID(int ID) {
@@ -34,19 +33,21 @@ public class user {
     public String getFname() {
         return Fname;
     }
+
     public void setFname(String fname) {
         this.Fname = fname;
     }
+
     public String getLname() {
         return Lname;
     }
+
     public void setLname(String lname) {
         this.Lname = lname;
     }
 
-    public String getName(){
+    public String getName() {
         return Fname + " " + Lname;
-
     }
 
     public String getEmail() {
@@ -60,31 +61,44 @@ public class user {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArrayList<post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(ArrayList<post> posts) {
+        this.posts = posts;
     }
 
     public ArrayList<comment> getComments() {
         return comments;
     }
+
     public void setComments(ArrayList<comment> comments) {
         this.comments = comments;
     }
+
     public ArrayList<post> getLikes() {
         return likes;
     }
+
     public void setLikes(ArrayList<post> likes) {
         this.likes = likes;
     }
+
     public ArrayList<user> getFriends() {
         return friends;
     }
+
     public void setFriends(ArrayList<user> friends) {
         this.friends = friends;
-
     }
 
-    public ArrayList<Integer> getFriendsIDs(){
+    public ArrayList<Integer> getFriendsIDs() {
         ArrayList<Integer> friendsIDs = new ArrayList<>();
         for (user friend : friends) {
             friendsIDs.add(friend.getID());
