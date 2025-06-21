@@ -1,9 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package views;
 
+import Model.database;
+import Model.user;
+import controller.createuser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
@@ -19,28 +18,34 @@ public class welcome {
     JButton langSwitch;
     JLabel titleLabel;
 
-    public welcome() {
+    public welcome(database db) {
         frame = new JFrame("MengYou梦友");
 
         panel = new JPanel(new BorderLayout());
         panel.setBackground(guiCons.pink);
         frame.setResizable(false);
         panel.setBorder(BorderFactory.createEmptyBorder(53, 84, 76, 84));
+
         titleLabel = new JLabel(lang.get("name"), JLabel.CENTER);
         titleLabel.setFont(new Font("微软雅黑", Font.BOLD, 24));
         titleLabel.setForeground(guiCons.White);
-        panel.add(titleLabel, BorderLayout.NORTH);
-        panel.add(titleLabel, BorderLayout.NORTH);
-        
+
         langSwitch = new JButton(lang.get("lang_switch"));
         langSwitch.setFocusPainted(false);
-        langSwitch.setForeground(guiCons.White);
+        langSwitch.setForeground(guiCons.lightpink);
         langSwitch.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        langSwitch.setFont(new Font("微软雅黑", Font.PLAIN, 20));
+        langSwitch.setBackground(guiCons.pink);
+        langSwitch.setFont(new Font("微软雅黑", Font.PLAIN, 14));
         langSwitch.addActionListener((ActionEvent e) -> {
             lang.toggleLanguage();
             refreshText();
         });
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setOpaque(false);
+        topPanel.add(langSwitch, BorderLayout.EAST);
+        topPanel.add(titleLabel, BorderLayout.CENTER);
+        panel.add(topPanel, BorderLayout.NORTH);
 
         JPanel centerPanel = new JPanel(new GridLayout(6, 1, 10, 10));
         centerPanel.setBackground(guiCons.pink);
@@ -67,23 +72,6 @@ public class welcome {
         login.setForeground(guiCons.Hint1);
         login.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panel.add(login, BorderLayout.SOUTH);
-
-        langSwitch = new JButton(lang.get("lang_switch"));
-        langSwitch.setFocusPainted(false);
-        langSwitch.setForeground(guiCons.lightpink);
-        langSwitch.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        langSwitch.setBackground(guiCons.pink);
-        langSwitch.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-        langSwitch.addActionListener((ActionEvent e) -> {
-            lang.toggleLanguage();
-            refreshText();
-        });
-
-        JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setOpaque(false);
-        topPanel.add(langSwitch, BorderLayout.EAST);
-        topPanel.add(titleLabel, BorderLayout.CENTER);
-        panel.add(topPanel, BorderLayout.NORTH);
 
         frame.getContentPane().add(panel);
         frame.pack();
@@ -112,33 +100,26 @@ public class welcome {
                     JOptionPane.showMessageDialog(frame, lang.get("password_too_short"));
                     return;
                 }
-                if (pass.isEmpty() || confirmPass.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, lang.get("password_empty"));
-                    return;
-                }
-                if (emailText.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, lang.get("email_empty"));
-                    return;
-                }
 
-                // Here you would typically handle account creation logic
-                // For now, we just show a success message
-                // Show success alert dialog
-                JOptionPane.showMessageDialog(frame, lang.get("account_created_successfully"));
-                
+                user u = new user();
+                u.setFname(first);
+                u.setLname(last);
+                u.setEmail(emailText);
+                u.setPassword(pass);
+
+                createuser create = new createuser(u, db);
+                if (!create.isEmailUsed()) {
+                    create.create();
+                    JOptionPane.showMessageDialog(frame, lang.get("account_created_successfully") + " ID: " + u.getID());
+                } else {
+                    JOptionPane.showMessageDialog(frame, lang.get("email_already_used"));
+                }
             }
 
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent e) {}
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent e) {}
+            @Override public void mousePressed(java.awt.event.MouseEvent e) {}
+            @Override public void mouseReleased(java.awt.event.MouseEvent e) {}
+            @Override public void mouseEntered(java.awt.event.MouseEvent e) {}
+            @Override public void mouseExited(java.awt.event.MouseEvent e) {}
         });
     }
 
