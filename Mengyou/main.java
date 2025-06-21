@@ -1,9 +1,10 @@
 package Mengyou;
 
+import Model.database;
 import views.welcome;
 
 public class main {
-        public static void main(String[] args) {
-            new welcome();
-        }
+    public static void main(String[] args) {
+        new welcome(new database());
     }
+}
