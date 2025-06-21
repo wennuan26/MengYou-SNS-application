@@ -2,12 +2,11 @@ package Model;
 
 import java.time.LocalDateTime;
 
-// Make sure there is a User class in the same package or import it if it's elsewhere
 public class comment {
 
     private int ID;
     private String content;
-    private user user; // Assuming 'User' is a class that represents the author of the comment
+    private user user; // Assuming 'User' class exists and is imported or in same package
     private LocalDateTime dateTime;
 
     public comment() {
