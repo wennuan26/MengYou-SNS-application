@@ -1,13 +1,12 @@
 package controller;
 
+import Model.database;
+import Model.user;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-import Model.database;
-import Model.user;
 
 public class createuser {
 
@@ -65,7 +64,7 @@ public class createuser {
         u.setLikes(new ArrayList<>());
         u.setPosts(new ArrayList<>());
 
-        String select = "SELECT `ID` FROM `Users` WHERE `Email` = ? AND `Password` = ?";
+        String select = "SELECT `UID` FROM `Users` WHERE `Email` = ? AND `Password` = ?";
 
         try {
             PreparedStatement stmt = db.getConnection().prepareStatement(select);
@@ -74,7 +73,7 @@ public class createuser {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                u.setID(rs.getInt("ID"));
+                u.setID(rs.getInt("UID"));
             } else {
                 JOptionPane.showMessageDialog(null, "User not found", "Error", JOptionPane.ERROR_MESSAGE);
                 return null;
