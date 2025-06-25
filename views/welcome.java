@@ -110,7 +110,7 @@ public class welcome {
                 createuser create = new createuser(u, db);
                 if (!create.isEmailUsed()) {
                     create.create();
-                    JOptionPane.showMessageDialog(frame, lang.get("account_created_successfully") + " ID: " + u.getID());
+                    JOptionPane.showMessageDialog(frame, lang.get("account_created_successfully") + " UID: " + u.getID());
                 } else {
                     JOptionPane.showMessageDialog(frame, lang.get("email_already_used"));
                 }
