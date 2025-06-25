@@ -7,14 +7,14 @@ package views;
 import java.awt.Color;
 
 public class guiCons {
-    public static final Color pink = Color.decode("#CBAACB");
+    public static final Color pink = Color.decode("#9999FF");
     public static final Color White = Color.WHITE;
-    public static final Color lightpink = Color.decode("#F3B0C3");
+    public static final Color lightpink = Color.decode("#9999FF");
     public static final Color Hint1 = Color.decode("#445A67");
     public static final Color Hint = Color.decode("#55CBCD");
-    public static final Color Background = Color.decode("#F5F5F5");
+    public static final Color Background = Color.decode("#9999FF");
     public static final Color Accent = Color.decode("#4A90E2");
-    public static final Color SoftGray = Color.decode("#445A67");
+    public static final Color SoftGray = Color.decode("#6666FF");
 
     public static Color getSoftgray() {
         return SoftGray;
