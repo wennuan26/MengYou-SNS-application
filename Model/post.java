@@ -1,75 +1,45 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class post {
+public class Post {
+    private int id;
+    private User author;
+    private String content; // text, image or video URL
+    private LocalDateTime timestamp;
 
-    private int ID;
-    private String content;
-    private user user;
-    // Assuming 'user' is a class that represents the author of the post
-    // If 'user' is a class, it should be imported or defined in this package
-    private LocalDateTime dateTime;
-    private ArrayList<comment> comments;
-    private ArrayList<user> likes;
+    private ArrayList<Comment> comments = new ArrayList<>();
+    private ArrayList<User> likes = new ArrayList<>();
 
-    public post() {
-        // Default constructor
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
+    public Post(int id, User author, String content, LocalDateTime timestamp) {
+        this.id = id;
+        this.author = author;
         this.content = content;
+        this.timestamp = timestamp;
     }
 
-    public user getUser() {
-        return user;
-    }
+    // Getters
+    public int getId() { return id; }
+    public User getAuthor() { return author; }
+    public String getContent() { return content; }
+    public LocalDateTime getTimestamp() { return timestamp; }
 
-    public void setUser(user user) {
-        this.user = user;
-    }
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-    public ArrayList<comment> getComments() {
-        return comments;
-    }
-    public void setComments(ArrayList<comment> comments) {
-        this.comments = comments;
+    public ArrayList<Comment> getComments() { return comments; }
+    public ArrayList<User> getLikes() { return likes; }
 
-    }
-    public ArrayList<user> getLikes() {
-        return likes;
-    }
-    public void setLikes(ArrayList<user> likes) {
-        this.likes = likes;
-    }
-    public void addComment(comment c) {
-        if (comments == null) {
-            comments = new ArrayList<>();
+    // Like and Comment Methods
+    public void like(User user) {
+        if (!likes.contains(user)) {
+            likes.add(user);
         }
-        comments.add(c);
     }
-    public void addLike(user user) {
-        if (likes == null) {
-            likes = new ArrayList<>();
-        }
-        likes.add(user);
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 }
