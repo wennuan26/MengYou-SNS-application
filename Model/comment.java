@@ -1,47 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Model;
 
 import java.time.LocalDateTime;
 
-public class comment {
-
-    private int ID;
+public class Comment {
+    private int id;
+    private User author;
     private String content;
-    private user user; // Assuming 'User' class exists and is imported or in same package
-    private LocalDateTime dateTime;
+    private LocalDateTime timestamp;
 
-    public comment() {
-        // Default constructor
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
+    public Comment(int id, User author, String content, LocalDateTime timestamp) {
+        this.id = id;
+        this.author = author;
         this.content = content;
+        this.timestamp = timestamp;
     }
 
-    public user getUser() {
-        return user;
-    }
-
-    public void setUser(user user) {
-        this.user = user;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
+    public int getId() { return id; }
+    public User getAuthor() { return author; }
+    public String getContent() { return content; }
+    public LocalDateTime getTimestamp() { return timestamp; }
 }
