@@ -1,108 +1,43 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Model;
 
 import java.util.ArrayList;
 
-public class user {
-
-    private int ID;
-    private String Fname;
-    private String Lname;
+public class User {
+    private int id;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
-    private ArrayList<post> posts;
-    private ArrayList<comment> comments;
-    private ArrayList<post> likes;
-    private ArrayList<user> friends;
+    private String role; // guest, registered, admin
 
-    // Constructor initializes lists to avoid NullPointerException
-    public user() {
-        posts = new ArrayList<>();
-        comments = new ArrayList<>();
-        likes = new ArrayList<>();
-        friends = new ArrayList<>();
-    }
+    private ArrayList<Post> posts = new ArrayList<>();
+    private ArrayList<User> friends = new ArrayList<>();
+    private ArrayList<Comment> comments = new ArrayList<>();
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getFname() {
-        return Fname;
-    }
-
-    public void setFname(String fname) {
-        this.Fname = fname;
-    }
-
-    public String getLname() {
-        return Lname;
-    }
-
-    public void setLname(String lname) {
-        this.Lname = lname;
-    }
-
-    public String getName() {
-        return Fname + " " + Lname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public User(int id, String firstName, String lastName, String email, String password, String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
+        this.role = role;
     }
 
-    public ArrayList<post> getPosts() {
-        return posts;
-    }
+    // Getters and Setters
+    public int getId() { return id; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getEmail() { return email; }
+    public String getPassword() { return password; }
+    public String getRole() { return role; }
 
-    public void setPosts(ArrayList<post> posts) {
-        this.posts = posts;
-    }
+    public void setRole(String role) { this.role = role; }
 
-    public ArrayList<comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(ArrayList<comment> comments) {
-        this.comments = comments;
-    }
-
-    public ArrayList<post> getLikes() {
-        return likes;
-    }
-
-    public void setLikes(ArrayList<post> likes) {
-        this.likes = likes;
-    }
-
-    public ArrayList<user> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(ArrayList<user> friends) {
-        this.friends = friends;
-    }
-
-    public ArrayList<Integer> getFriendsIDs() {
-        ArrayList<Integer> friendsIDs = new ArrayList<>();
-        for (user friend : friends) {
-            friendsIDs.add(friend.getID());
-        }
-        return friendsIDs;
-    }
+    public ArrayList<Post> getPosts() { return posts; }
+    public ArrayList<User> getFriends() { return friends; }
+    public ArrayList<Comment> getComments() { return comments; }
 }
