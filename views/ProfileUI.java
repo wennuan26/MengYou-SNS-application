@@ -1,69 +1,92 @@
+package views;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.sql.*;
-import javax.swing.*;
+import Model.User;
 
-public class ProfileUI extends JFrame {
+public class ProfileUI extends jFrame {
     private int userId;
-    private JTextField displayNameField, emailField;
-    private JLabel avatarLabel;
+    private User currentUser;
+    private jtextfield displayNameField, emailField;
+    private jlabel avatarLabel;
     private String avatarPath = "";
     private Connection connection;
 
-    public ProfileUI(int userId) {
-        this.userId = userId;
+    public ProfileUI(User user) {
+        this.currentUser = user;
+        this.userId = user.getId();
+
         setTitle("Edit Profile");
-        setSize(400, 400);
+        setSize(600, 600);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        getContentPane().setBackground(Color.DARK_GRAY);
-        setLayout(new BorderLayout());
+        setLayout(null);
 
         // Connect to DB
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mengyou_db", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mengyou_db", "root", "@wennuan_26");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Database connection failed");
             return;
         }
 
-        // Load current profile info
-        loadProfileInfo();
+        // 🔙 Back Button
+        jbutton backBtn = new jbutton("Back", 25, 14);
+        backBtn.setBounds(20, 20, 100, 40);
+        backBtn.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                dispose(); // close profile window
+                new HomeUI(currentUser); // go back to home
+            }
+        });
+        add(backBtn);
 
-        // Center Panel
-        JPanel centerPanel = new JPanel(new GridLayout(4, 1, 10, 10));
-        centerPanel.setBackground(Color.DARK_GRAY);
-        centerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        avatarLabel = new JLabel("Click to upload picture", SwingConstants.CENTER);
+        // 🖼 Avatar Label
+        avatarLabel = new jlabel("Click to upload picture", 16, guiCons.lightpink, Font.PLAIN);
+        avatarLabel.setBounds(200, 70, 200, 120);
+        avatarLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        avatarLabel.setVerticalAlignment(SwingConstants.CENTER);
+        avatarLabel.setBackground(guiCons.White);
         avatarLabel.setOpaque(true);
-        avatarLabel.setBackground(Color.LIGHT_GRAY);
-        avatarLabel.setForeground(Color.BLACK);
-        avatarLabel.setPreferredSize(new Dimension(100, 100));
-        avatarLabel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        avatarLabel.setBorder(BorderFactory.createLineBorder(guiCons.lightpink, 2));
         avatarLabel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 uploadAvatar();
             }
         });
+        add(avatarLabel);
 
-        displayNameField = new JTextField();
-        emailField = new JTextField();
+        displayNameField = new jtextfield("");
+        emailField = new jtextfield("");
 
-        centerPanel.add(avatarLabel);
-        centerPanel.add(new LabeledField("Display Name:", displayNameField));
-        centerPanel.add(new LabeledField("Email:", emailField));
+        loadProfileInfo(); // Loads data into fields
 
-        // Save button
-        JButton saveBtn = new JButton("Save Changes");
-        saveBtn.setBackground(new Color(0x1ABC9C));
-        saveBtn.setForeground(Color.WHITE);
-        saveBtn.addActionListener(e -> updateProfile());
+        jlabel nameLabel = new jlabel("Display Name:", 16, guiCons.White, Font.PLAIN);
+        nameLabel.setBounds(100, 220, 150, 30);
+        add(nameLabel);
 
-        centerPanel.add(saveBtn);
-        add(centerPanel, BorderLayout.CENTER);
+        displayNameField.setBounds(250, 220, 250, 40);
+        add(displayNameField);
+
+        jlabel emailLabel = new jlabel("Email:", 16, guiCons.White, Font.PLAIN);
+        emailLabel.setBounds(100, 290, 150, 30);
+        add(emailLabel);
+
+        emailField.setBounds(250, 290, 250, 40);
+        add(emailField);
+
+        jbutton saveBtn = new jbutton("Save Changes", 25, 14);
+        saveBtn.setBounds(225, 400, 150, 45);
+        saveBtn.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                updateProfile();
+            }
+        });
+        add(saveBtn);
+
         setVisible(true);
     }
 
@@ -75,10 +98,10 @@ public class ProfileUI extends JFrame {
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                emailField = new JTextField(rs.getString("email"));
-                displayNameField = new JTextField(rs.getString("display_name"));
+                emailField.setText(rs.getString("email"));
+                displayNameField.setText(rs.getString("display_name"));
                 avatarPath = rs.getString("avatar_url");
-                avatarLabel = new JLabel("<html><center>Click to change<br>Avatar</center></html>", SwingConstants.CENTER);
+                avatarLabel.setText("<html><center>Click to<br>change Avatar</center></html>");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,22 +139,5 @@ public class ProfileUI extends JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Update failed.");
         }
-    }
-
-    // Helper class for labels + fields
-    class LabeledField extends JPanel {
-        public LabeledField(String label, JTextField field) {
-            setLayout(new BorderLayout());
-            setBackground(Color.DARK_GRAY);
-            JLabel lbl = new JLabel(label);
-            lbl.setForeground(Color.WHITE);
-            add(lbl, BorderLayout.WEST);
-            add(field, BorderLayout.CENTER);
-        }
-    }
-
-    // For testing
-    public static void main(String[] args) {
-        new ProfileUI(1); // test user_id
     }
 }
